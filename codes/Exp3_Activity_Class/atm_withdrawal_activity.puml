@@ -1,0 +1,43 @@
+@startuml
+|Customer|
+start
+:Insert Card;
+|ATM System|
+:Read Card;
+repeat
+  :Prompt for PIN;
+  |Customer|
+  :Enter PIN;
+  |Bank Server|
+  :Validate PIN;
+repeat while (PIN invalid AND attempts < 3?) is (yes)
+if (PIN valid?) then (no)
+  |ATM System|
+  :Retain Card;
+  stop
+endif
+|Customer|
+:Select Withdraw;
+:Enter Amount;
+|Bank Server|
+if (Sufficient balance?) then (no)
+  |ATM System|
+  :Display "Insufficient funds";
+  :Eject Card;
+  stop
+else (yes)
+  :Debit Account;
+endif
+|ATM System|
+fork
+  :Dispense Cash;
+fork again
+  :Print Receipt;
+fork again
+  :Send SMS Alert;
+end fork
+:Eject Card;
+|Customer|
+:Collect Cash and Card;
+stop
+@enduml

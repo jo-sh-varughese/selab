@@ -1,0 +1,48 @@
+@startuml
+class Customer {
+  -customerId : String
+  -name : String
+  -email : String
+  +login(email : String, pwd : String) : boolean
+  +placeOrder(cart : Cart) : Order
+}
+class Cart {
+  -cartId : String
+  +addItem(p : Product, qty : int) : void
+  +getTotal() : double
+}
+class Product {
+  -productId : String
+  -name : String
+  -price : double
+  -stock : int
+  +isAvailable() : boolean
+}
+class Order {
+  -orderId : String
+  -orderDate : Date
+  -status : Enum
+  +calculateTotal() : double
+  +cancel() : boolean
+}
+class OrderItem {
+  -quantity : int
+  -unitPrice : double
+  +getSubtotal() : double
+}
+abstract class Payment {
+  -paymentId : String
+  -amount : double
+  +pay() : boolean
+}
+class UPIPayment
+class CardPayment
+Customer "1" -- "0..*" Order : places >
+Customer "1" *-- "1" Cart : owns >
+Cart "0..*" o-- "0..*" Product : contains >
+Order "1" *-- "1..*" OrderItem
+OrderItem "0..*" --> "1" Product : refers to >
+Order "1" -- "1" Payment : paid by >
+Payment <|-- UPIPayment
+Payment <|-- CardPayment
+@enduml

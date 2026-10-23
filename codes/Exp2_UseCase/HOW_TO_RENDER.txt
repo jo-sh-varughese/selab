@@ -1,0 +1,1 @@
+Render .puml files at https://www.plantuml.com/plantuml or with the PlantUML plugin in VS Code / draw.io (Arrange > Insert > Advanced > PlantUML).

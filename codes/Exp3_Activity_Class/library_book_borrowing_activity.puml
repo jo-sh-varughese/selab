@@ -1,0 +1,35 @@
+@startuml
+' Library - Book Borrowing activity diagram (swimlanes)
+|Member|
+start
+:Search book in catalogue;
+|Library System|
+if (Book available?) then (no)
+  :Offer reservation;
+  |Member|
+  if (Reserve?) then (yes)
+    |Library System|
+    :Create reservation;
+  endif
+  stop
+else (yes)
+endif
+|Member|
+:Request issue;
+|Librarian|
+:Verify membership;
+if (Member valid AND no unpaid fine?) then (no)
+  :Reject request;
+  stop
+else (yes)
+endif
+fork
+  :Issue book;
+fork again
+  |Library System|
+  :Create Loan record and update copies;
+end fork
+|Member|
+:Collect book;
+stop
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+actor Customer
+actor "Bank Staff" as Staff
+actor "OTP / SMS Service" as OTP
+rectangle "Online Banking System" {
+  usecase "Login" as L
+  usecase "Check Balance" as CB
+  usecase "View Mini Statement" as MS
+  usecase "Transfer Funds" as TF
+  usecase "Verify OTP" as VO
+  usecase "Pay Bills" as PB
+  usecase "Block Card" as BC
+  usecase "Approve Account" as AA
+}
+Customer --> L
+Customer --> CB
+Customer --> TF
+Customer --> PB
+Customer --> BC
+Staff --> AA
+VO --> OTP
+TF .> VO : <<include>>
+PB .> VO : <<include>>
+MS .> CB : <<extend>>
+@enduml

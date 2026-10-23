@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+actor Customer
+actor "Bank Server" as Bank
+actor Technician
+rectangle "ATM System" {
+  usecase "Authenticate PIN" as A
+  usecase "Withdraw Cash" as W
+  usecase "Check Balance" as C
+  usecase "Change PIN" as P
+  usecase "Mini Statement" as M
+  usecase "Print Receipt" as R
+  usecase "Retain Card" as RC
+  usecase "Refill Cash" as F
+}
+Customer --> W
+Customer --> C
+Customer --> P
+Customer --> M
+Technician --> F
+A --> Bank
+W .> A : <<include>>
+C .> A : <<include>>
+P .> A : <<include>>
+R .> W : <<extend>>
+RC .> A : <<extend>>
+M .> C : <<extend>>
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+actor Customer
+actor Seller
+actor Admin
+actor "Payment Gateway" as PG
+actor "Delivery Agent" as DA
+rectangle "Online Shopping System" {
+  usecase "Register" as UC1
+  usecase "Login" as UC2
+  usecase "Search Product" as UC3
+  usecase "Add to Cart" as UC4
+  usecase "Place Order" as UC5
+  usecase "Make Payment" as UC6
+  usecase "Apply Coupon" as UC7
+  usecase "Track Order" as UC8
+  usecase "Return Product" as UC9
+  usecase "Add Product" as UC10
+  usecase "Ship Order" as UC11
+  usecase "Manage Users" as UC12
+  usecase "Generate Report" as UC13
+  usecase "Update Delivery Status" as UC14
+}
+Customer --> UC1
+Customer --> UC2
+Customer --> UC3
+Customer --> UC4
+Customer --> UC5
+Customer --> UC8
+Customer --> UC9
+Seller --> UC10
+Seller --> UC11
+Admin --> UC12
+Admin --> UC13
+UC6 --> PG
+UC14 --> DA
+UC5 .> UC6 : <<include>>
+UC5 .> UC2 : <<include>>
+UC7 .> UC5 : <<extend>>
+@enduml

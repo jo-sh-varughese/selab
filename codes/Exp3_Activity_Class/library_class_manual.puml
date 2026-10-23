@@ -1,0 +1,40 @@
+@startuml
+' Library Management System - Class Diagram (from lab manual)
+class Member {
+  -memberId : String
+  -name : String
+  -email : String
+  -membershipType : Enum
+  +searchBook(title : String) : List
+  +reserveBook(isbn : String) : boolean
+  +returnBook(loanId : String) : void
+}
+class Book {
+  -isbn : String
+  -title : String
+  -availableCopies : int
+  +getAvailability() : boolean
+}
+class Loan {
+  -loanId : String
+  -issueDate : Date
+  -status : Enum
+  +calculateFine() : double
+  +renewLoan() : boolean
+}
+class Fine {
+  -amount : double
+  -paid : boolean
+  +markPaid() : void
+}
+class Librarian {
+  -staffId : String
+  -designation : String
+  +issueBook(memberId, isbn) : Loan
+  +receiveReturn(loanId) : void
+}
+Member "1" -- "0..*" Loan : borrows >
+Loan "0..*" --> "1" Book : references >
+Loan "1" *-- "0..1" Fine : incurs >
+Librarian --|> Member
+@enduml
